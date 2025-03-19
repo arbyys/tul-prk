@@ -31,8 +31,47 @@
 - `keyword ::= (LOG <variable> GOL)`
 - `keyword ::= (LOG .* GOL)`
 
-### Příklad kódu
+### Gramatika
+
+```ebnf
+program ::= <keyword>\n
+
+variable ::= \$[a-z][a-z0-9_]
+
+operator ::= "+" | "-" | "*" | "/" | "^" | "%"
+
+compare_operator ::= "==" | ">=" | ">" | "<=" | "<" | "!="
+
+condition ::= <variable><operator><variable>
+
+keyword ::= (SET <variable> = <value> TES) |
+            (LOOPIF <condition>\n<program> FIPOOL) |
+            (IF <condition>\n<program> FI) |
+            (LOG <variable> GOL) |
+            (LOG .* GOL) |
+            //.* |
+            (IGNORE <program> ERONGI) |
 
 ```
 
+### Příklad kódu
+
+```
+// example program
+
+(SET $a = 15 TES)
+(SET $b = 105 TES)
+
+(IF $b % $a == 0 
+    (LOOPIF $b > 0
+        (LOG "aktuální hodnota $b:" GOL)
+        (LOG $b GOL)
+        (SET $b = $b - $a TES)
+    FIPOOL)
+FI)
+
+(IGNORE 
+    multi line
+    comment
+ERONGI)
 ```
