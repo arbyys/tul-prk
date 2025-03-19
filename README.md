@@ -50,7 +50,7 @@ keyword ::= (SET <variable> = <value> TES) |
             (LOG <variable> GOL) |
             (LOG .* GOL) |
             //.* |
-            (IGNORE <program> ERONGI) |
+            (IGNORE <program> ERONGI)
 
 ```
 
