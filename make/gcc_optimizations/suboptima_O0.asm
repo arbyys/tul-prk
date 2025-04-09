@@ -28,15 +28,16 @@ condition1:
 	leaq	.LC0(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	jmp	.L4
+	movl	$1, %eax
+	jmp	.L3
 .L2:
 	movl	-4(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC1(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-.L4:
-	nop
+	movl	$1, %eax
+.L3:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
@@ -71,30 +72,30 @@ main:
 	movl	$-10, %edi
 	call	condition1
 	movl	$0, -4(%rbp)
-	jmp	.L6
-.L9:
-	cmpl	$10, -4(%rbp)
-	jle	.L7
-	leaq	.LC3(%rip), %rdi
-	movl	$0, %eax
-	call	printf@PLT
-	jmp	.L8
-.L7:
-	cmpl	$0, -4(%rbp)
-	jns	.L8
-	leaq	.LC3(%rip), %rdi
-	movl	$0, %eax
-	call	printf@PLT
+	jmp	.L5
 .L8:
+	cmpl	$10, -4(%rbp)
+	jle	.L6
+	leaq	.LC3(%rip), %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	jmp	.L7
+.L6:
+	cmpl	$0, -4(%rbp)
+	jns	.L7
+	leaq	.LC3(%rip), %rdi
+	movl	$0, %eax
+	call	printf@PLT
+.L7:
 	movl	-4(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC4(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
 	addl	$1, -4(%rbp)
-.L6:
+.L5:
 	cmpl	$9, -4(%rbp)
-	jle	.L9
+	jle	.L8
 	movl	$0, %eax
 	leave
 	.cfi_def_cfa 7, 8

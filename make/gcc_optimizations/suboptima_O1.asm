@@ -23,7 +23,8 @@ condition1:
 	movl	$1, %edi
 	movl	$0, %eax
 	call	__printf_chk@PLT
-.L1:
+.L3:
+	movl	$1, %eax
 	addq	$8, %rsp
 	.cfi_remember_state
 	.cfi_def_cfa_offset 8
@@ -34,7 +35,7 @@ condition1:
 	movl	$1, %edi
 	movl	$0, %eax
 	call	__printf_chk@PLT
-	jmp	.L1
+	jmp	.L3
 	.cfi_endproc
 .LFE23:
 	.size	condition1, .-condition1

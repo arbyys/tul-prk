@@ -13,14 +13,20 @@ condition1:
 	.cfi_startproc
 	endbr64
 	movl	%edi, %edx
+	pushq	%rcx
+	.cfi_def_cfa_offset 16
 	leaq	.LC0(%rip), %rsi
 	testl	%edi, %edi
-	jg	.L3
+	jg	.L5
 	leaq	.LC1(%rip), %rsi
-.L3:
+.L5:
 	movl	$1, %edi
 	xorl	%eax, %eax
-	jmp	__printf_chk@PLT
+	call	__printf_chk@PLT
+	movl	$1, %eax
+	popq	%rdx
+	.cfi_def_cfa_offset 8
+	ret
 	.cfi_endproc
 .LFE13:
 	.size	condition1, .-condition1
@@ -55,7 +61,7 @@ main:
 	xorl	%eax, %eax
 	movl	$1, %edi
 	call	__printf_chk@PLT
-.L6:
+.L8:
 	movl	%ebx, %edx
 	movq	%rbp, %rsi
 	movl	$1, %edi
@@ -63,7 +69,7 @@ main:
 	call	__printf_chk@PLT
 	incl	%ebx
 	cmpl	$10, %ebx
-	jne	.L6
+	jne	.L8
 	popq	%rdx
 	.cfi_def_cfa_offset 24
 	xorl	%eax, %eax

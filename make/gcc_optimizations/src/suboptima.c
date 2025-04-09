@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-void condition1(int i){
+int condition1(int i){
 /* Condition 2:*/
   if (i > 0) {
       printf ("The value of i is %d - condition was true and you see this.\n",i);

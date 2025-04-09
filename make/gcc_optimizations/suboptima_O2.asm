@@ -15,20 +15,32 @@ condition1:
 .LFB23:
 	.cfi_startproc
 	endbr64
+	subq	$8, %rsp
+	.cfi_def_cfa_offset 16
 	movl	%edi, %edx
 	testl	%edi, %edi
 	jle	.L2
 	leaq	.LC0(%rip), %rsi
 	movl	$1, %edi
 	xorl	%eax, %eax
-	jmp	__printf_chk@PLT
+	call	__printf_chk@PLT
+	movl	$1, %eax
+	addq	$8, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 8
+	ret
 	.p2align 4,,10
 	.p2align 3
 .L2:
+	.cfi_restore_state
 	leaq	.LC1(%rip), %rsi
 	movl	$1, %edi
 	xorl	%eax, %eax
-	jmp	__printf_chk@PLT
+	call	__printf_chk@PLT
+	movl	$1, %eax
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 8
+	ret
 	.cfi_endproc
 .LFE23:
 	.size	condition1, .-condition1
@@ -71,7 +83,7 @@ main:
 	call	__printf_chk@PLT
 	.p2align 4,,10
 	.p2align 3
-.L5:
+.L7:
 	movl	%ebx, %edx
 	movq	%rbp, %rsi
 	movl	$1, %edi
@@ -79,7 +91,7 @@ main:
 	call	__printf_chk@PLT
 	addl	$1, %ebx
 	cmpl	$10, %ebx
-	jne	.L5
+	jne	.L7
 	addq	$8, %rsp
 	.cfi_def_cfa_offset 24
 	xorl	%eax, %eax
