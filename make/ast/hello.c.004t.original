@@ -1,0 +1,115 @@
+
+;; Function fun (null)
+;; enabled by -tree-original
+
+@1      bind_expr        type: @2       vars: @3       body: @4      
+@2      void_type        name: @5       algn: 8       
+@3      var_decl         name: @6       type: @7       scpe: @8      
+                         srcp: hello.c:3               init: @9      
+                         size: @10      algn: 32       used: 1       
+@4      statement_list   0   : @11      1   : @12     
+@5      type_decl        name: @13      type: @2      
+@6      identifier_node  strg: temp     lngt: 4       
+@7      integer_type     name: @14      size: @10      algn: 32      
+                         prec: 32       sign: signed   min : @15     
+                         max : @16     
+@8      function_decl    name: @17      type: @18      srcp: hello.c:2      
+                         args: @19      link: extern  
+@9      trunc_mod_expr   type: @7       op 0: @20      op 1: @19     
+@10     integer_cst      type: @21     int: 32
+@11     decl_expr        type: @2      
+@12     return_expr      type: @2       expr: @22     
+@13     identifier_node  strg: void     lngt: 4       
+@14     type_decl        name: @23      type: @7      
+@15     integer_cst      type: @7      int: -2147483648
+@16     integer_cst      type: @7      int: 2147483647
+@17     identifier_node  strg: fun      lngt: 3       
+@18     function_type    size: @24      algn: 8        retn: @7      
+                         prms: @25     
+@19     parm_decl        name: @26      type: @7       scpe: @8      
+                         srcp: hello.c:2               argt: @7      
+                         size: @10      algn: 32       used: 1       
+@20     parm_decl        name: @27      type: @7       scpe: @8      
+                         srcp: hello.c:2               argt: @7      
+                         size: @10      algn: 32       used: 1       
+@21     integer_type     name: @28      size: @29      algn: 128     
+                         prec: 128      sign: unsigned min : @30     
+                         max : @31     
+@22     modify_expr      type: @7       op 0: @32      op 1: @33     
+@23     identifier_node  strg: int      lngt: 3       
+@24     integer_cst      type: @21     int: 8
+@25     tree_list        valu: @7       chan: @34     
+@26     identifier_node  strg: n1       lngt: 2       
+@27     identifier_node  strg: n2       lngt: 2       
+@28     identifier_node  strg: bitsizetype             lngt: 11      
+@29     integer_cst      type: @21     int: 128
+@30     integer_cst      type: @21     int: 0
+@31     integer_cst      type: @21     int: -1
+@32     result_decl      type: @7       scpe: @8       srcp: hello.c:2      
+                         note: artificial              size: @10     
+                         algn: 32      
+@33     plus_expr        type: @7       op 0: @35      op 1: @3      
+@34     tree_list        valu: @7       chan: @36     
+@35     mult_expr        type: @7       op 0: @20      op 1: @19     
+@36     tree_list        valu: @2      
+
+
+;; Function main (null)
+;; enabled by -tree-original
+
+@1      statement_list   0   : @2       1   : @3      
+@2      bind_expr        type: @4       body: @5      
+@3      return_expr      type: @4       expr: @6      
+@4      void_type        name: @7       algn: 8       
+@5      statement_list   0   : @8       1   : @9      
+@6      modify_expr      type: @10      op 0: @11      op 1: @12     
+@7      type_decl        name: @13      type: @4      
+@8      call_expr        type: @10      fn  : @14      0   : @15     
+                         1   : @16     
+@9      return_expr      type: @4       expr: @17     
+@10     integer_type     name: @18      size: @19      algn: 32      
+                         prec: 32       sign: signed   min : @20     
+                         max : @21     
+@11     result_decl      type: @10      scpe: @22      srcp: hello.c:7      
+                         note: artificial              size: @19     
+                         algn: 32      
+@12     integer_cst      type: @10     int: 0
+@13     identifier_node  strg: void     lngt: 4       
+@14     addr_expr        type: @23      op 0: @24     
+@15     integer_cst      type: @10     int: 5
+@16     integer_cst      type: @10     int: 4
+@17     modify_expr      type: @10      op 0: @11      op 1: @12     
+@18     type_decl        name: @25      type: @10     
+@19     integer_cst      type: @26     int: 32
+@20     integer_cst      type: @10     int: -2147483648
+@21     integer_cst      type: @10     int: 2147483647
+@22     function_decl    name: @27      type: @28      srcp: hello.c:7      
+                         link: extern  
+@23     pointer_type     size: @29      algn: 64       ptd : @30     
+@24     function_decl    name: @31      type: @30      srcp: hello.c:2      
+                         args: @32      link: extern  
+@25     identifier_node  strg: int      lngt: 3       
+@26     integer_type     name: @33      size: @34      algn: 128     
+                         prec: 128      sign: unsigned min : @35     
+                         max : @36     
+@27     identifier_node  strg: main     lngt: 4       
+@28     function_type    unql: @37      size: @38      algn: 8       
+                         retn: @10     
+@29     integer_cst      type: @26     int: 64
+@30     function_type    size: @38      algn: 8        retn: @10     
+                         prms: @39     
+@31     identifier_node  strg: fun      lngt: 3       
+@32     parm_decl        name: @40      type: @10      scpe: @24     
+                         srcp: hello.c:2               argt: @10     
+                         size: @19      algn: 32       used: 1       
+@33     identifier_node  strg: bitsizetype             lngt: 11      
+@34     integer_cst      type: @26     int: 128
+@35     integer_cst      type: @26     int: 0
+@36     integer_cst      type: @26     int: -1
+@37     function_type    size: @38      algn: 8        retn: @10     
+@38     integer_cst      type: @26     int: 8
+@39     tree_list        valu: @10      chan: @41     
+@40     identifier_node  strg: n1       lngt: 2       
+@41     tree_list        valu: @10      chan: @42     
+@42     tree_list        valu: @4      
+
