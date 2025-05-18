@@ -30,7 +30,10 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
     public Void visitIfStatement(MirrorLangParser.IfStatementContext ctx) {
         boolean condition = evaluateCondition(ctx.condition());
         if (condition) {
-            visit(ctx.program());
+            // Visit all inner statements
+            for (MirrorLangParser.InnerStatementContext innerStmt : ctx.innerStatement()) {
+                visit(innerStmt);
+            }
         }
         return null;
     }
@@ -38,7 +41,19 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
     @Override
     public Void visitLoopIfStatement(MirrorLangParser.LoopIfStatementContext ctx) {
         while (evaluateCondition(ctx.condition())) {
-            visit(ctx.program());
+            // Visit all inner statements
+            for (MirrorLangParser.InnerStatementContext innerStmt : ctx.innerStatement()) {
+                visit(innerStmt);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Void visitInnerStatement(MirrorLangParser.InnerStatementContext ctx) {
+        // Visit the statement inside the inner statement
+        if (ctx.statement() != null) {
+            visit(ctx.statement());
         }
         return null;
     }

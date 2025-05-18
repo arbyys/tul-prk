@@ -77,6 +77,16 @@ public interface MirrorLangListener extends ParseTreeListener {
 	 */
 	void exitIgnoreStatement(MirrorLangParser.IgnoreStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MirrorLangParser#innerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterInnerStatement(MirrorLangParser.InnerStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MirrorLangParser#innerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitInnerStatement(MirrorLangParser.InnerStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MirrorLangParser#condition}.
 	 * @param ctx the parse tree
 	 */

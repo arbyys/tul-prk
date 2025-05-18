@@ -35,18 +35,20 @@ statement: setStatement
          | ignoreStatement
          ;
 
-setStatement: SET_START WS? VARIABLE WS? EQUALS WS? value WS? SET_END NEWLINE?;
+setStatement: SET_START WS? VARIABLE WS? EQUALS WS? expression WS? SET_END NEWLINE?;
 
 loopIfStatement: LOOPIF_START WS? condition WS? NEWLINE program LOOPIF_END NEWLINE?;
 
 ifStatement: IF_START WS? condition WS? NEWLINE program IF_END NEWLINE?;
 
-logStatement: LOG_START WS? (VARIABLE | STRING_VALUE) WS? LOG_END NEWLINE?;
+logStatement: LOG_START WS? (expression | STRING_VALUE) WS? LOG_END NEWLINE?;
 
 ignoreStatement: IGNORE_START WS? program WS? IGNORE_END NEWLINE?;
 
 condition: expression COMPARE_OPERATOR expression;
 
-expression: VARIABLE (ARITHMETIC_OPERATOR VARIABLE)?;
+expression: term ((ARITHMETIC_OPERATOR) term)*;
 
-value: INT_VALUE | STRING_VALUE | VARIABLE;
+term: VARIABLE | INT_VALUE | '(' expression ')';
+
+value: expression | STRING_VALUE;

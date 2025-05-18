@@ -100,6 +100,18 @@ public class MirrorLangBaseListener implements MirrorLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInnerStatement(MirrorLangParser.InnerStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInnerStatement(MirrorLangParser.InnerStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCondition(MirrorLangParser.ConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}

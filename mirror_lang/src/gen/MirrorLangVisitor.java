@@ -52,6 +52,12 @@ public interface MirrorLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIgnoreStatement(MirrorLangParser.IgnoreStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MirrorLangParser#innerStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInnerStatement(MirrorLangParser.InnerStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MirrorLangParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
