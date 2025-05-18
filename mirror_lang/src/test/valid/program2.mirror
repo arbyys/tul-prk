@@ -1,0 +1,11 @@
+(SET $a = 15 TES)
+
+(SET $b = 105 TES)
+
+(IF $b % $a == 0 
+    (LOOPIF $b > 0
+        (LOG "aktuální hodnota $b:" GOL)
+        (LOG $b GOL)
+        (SET $b = $b - $a TES)
+    FIPOOL)
+FI)

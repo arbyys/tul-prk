@@ -1,0 +1,41 @@
+// Example 1: Basic variable assignment and logging
+(SET $counter = 10 TES)
+(LOG $counter GOL)
+
+// Example 2: Arithmetic operations
+(SET $a = 5 TES)
+(SET $b = 10 TES)
+(SET $result = 15 TES)
+(IF $result == $a + $b
+    (LOG "Arithmetic works!" GOL)
+FI)
+
+// Example 3: Loops and conditions
+(SET $i = 1 TES)
+(LOOPIF $i <= 5
+    (LOG "Iteration number:" GOL)
+    (LOG $i GOL)
+    (SET $i = $i + 1 TES)
+FIPOOL)
+
+// Example 4: Nested structures
+(SET $x = 10 TES)
+(SET $y = 20 TES)
+(IF $x < $y
+    (LOOPIF $x < $y
+        (LOG "Incrementing x" GOL)
+        (SET $x = $x + 2 TES)
+    FIPOOL)
+    (LOG "Final x value:" GOL)
+    (LOG $x GOL)
+FI)
+
+// Example 5: Comments
+// This is a single line comment
+(SET $commented = 42 TES)
+(IGNORE
+    This is a multi-line comment
+    that spans several lines
+    and is ignored by the parser
+ERONGI)
+(LOG $commented GOL)

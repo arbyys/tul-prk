@@ -1,0 +1,2 @@
+(SET $a = 10 TES)
+(LOG $a GOL)
