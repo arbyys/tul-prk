@@ -1,0 +1,6 @@
+(SET $a = 10 TES)
+(SET $b = 20 TES)
+(SET $result = $a + $b TES)
+
+(LOG "Sum:" GOL)
+(LOG $result GOL)

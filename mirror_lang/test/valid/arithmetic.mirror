@@ -1,0 +1,22 @@
+(SET $a = 15 TES)
+(SET $b = 105 TES)
+
+(IF $b % $a == 0 
+    (LOOPIF $b > 0
+        (LOG "Current value of $b:" GOL)
+        (LOG $b GOL)
+        (SET $b = $b - $a TES)
+    FIPOOL)
+FI)
+
+(SET $c = 10 TES)
+(SET $d = 20 TES)
+(SET $s = $c + $d TES)
+(SET $d = $d - $c TES)
+(SET $p = $c * $d TES)
+(SET $q = $d / $c TES)
+
+(LOG $s GOL)
+(LOG $d GOL)
+(LOG $p GOL)
+(LOG $q GOL)

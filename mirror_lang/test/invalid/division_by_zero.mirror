@@ -1,0 +1,3 @@
+(SET $a = 10 TES)
+(SET $b = 0 TES)
+(SET $result = $a / $b TES)

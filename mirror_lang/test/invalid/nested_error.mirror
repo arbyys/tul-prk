@@ -1,0 +1,11 @@
+(SET $counter = 5 TES)
+
+(LOOPIF $counter > 0
+    (LOG "Counter:" GOL)
+    (LOG $counter GOL)
+    
+    (IF $counter == 3
+        (LOG "Found value 3" GOL)
+    
+    (SET $counter = $counter - 1 TES)
+FIPOOL)

@@ -1,0 +1,7 @@
+(SET $counter = 5 TES)
+
+(LOOPIF $counter > 0
+    (LOG "Current val:" GOL)
+    (LOG $counter GOL)
+    (SET $counter = $counter - 1 TES)
+FIPOOL)

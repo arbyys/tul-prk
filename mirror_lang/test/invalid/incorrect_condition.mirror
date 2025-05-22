@@ -1,0 +1,5 @@
+(SET $x = 10 TES)
+
+(IF $x > 
+    (LOG "Incorrect condition" GOL)
+FI)

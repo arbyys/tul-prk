@@ -1,9 +1,7 @@
 grammar MirrorLang;
 
-// Whitespace that should be skipped
 WS: [ \t]+ -> skip;
 
-// Newlines are significant in our grammar
 NEWLINE: '\r'? '\n';
 
 VARIABLE: '$' [a-z][a-z0-9_]*;
@@ -36,7 +34,7 @@ statement: setStatement
          | ifStatement
          | logStatement
          | ignoreStatement
-         | NEWLINE // Allow empty lines
+         | NEWLINE
          ;
 
 setStatement: SET_START WS? VARIABLE WS? EQUALS WS? expression WS? SET_END;

@@ -4,7 +4,7 @@
 
 (IF $b % $a == 0 
     (LOOPIF $b > 0
-        (LOG "aktuální hodnota $b:" GOL)
+        (LOG "Current val of $b:" GOL)
         (LOG $b GOL)
         (SET $b = $b - $a TES)
     FIPOOL)

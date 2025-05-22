@@ -30,7 +30,6 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
     public Void visitIfStatement(MirrorLangParser.IfStatementContext ctx) {
         boolean condition = evaluateCondition(ctx.condition());
         if (condition) {
-            // Visit all inner statements
             for (MirrorLangParser.InnerStatementContext innerStmt : ctx.innerStatement()) {
                 visit(innerStmt);
             }
@@ -41,7 +40,6 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
     @Override
     public Void visitLoopIfStatement(MirrorLangParser.LoopIfStatementContext ctx) {
         while (evaluateCondition(ctx.condition())) {
-            // Visit all inner statements
             for (MirrorLangParser.InnerStatementContext innerStmt : ctx.innerStatement()) {
                 visit(innerStmt);
             }
@@ -51,7 +49,6 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
 
     @Override
     public Void visitInnerStatement(MirrorLangParser.InnerStatementContext ctx) {
-        // Visit the statement inside the inner statement
         if (ctx.statement() != null) {
             visit(ctx.statement());
         }
@@ -98,10 +95,20 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
                     result *= nextTerm;
                     break;
                 case "/":
-                    result /= nextTerm;
+                    if (nextTerm == 0) {
+                        System.err.println("Runtime Error: Division by zero");
+                        result = 0;
+                    } else {
+                        result /= nextTerm;
+                    }
                     break;
                 case "%":
-                    result %= nextTerm;
+                    if (nextTerm == 0) {
+                        System.err.println("Runtime Error: Modulo by zero");
+                        result = 0;
+                    } else {
+                        result %= nextTerm;
+                    }
                     break;
             }
         }
@@ -112,9 +119,18 @@ public class Interpreter extends MirrorLangBaseVisitor<Void> {
     private int evaluateTerm(MirrorLangParser.TermContext ctx) {
         if (ctx.VARIABLE() != null) {
             String varName = ctx.VARIABLE().getText();
-            return variables.getOrDefault(varName, 0);
+            if (!variables.containsKey(varName)) {
+                System.err.println("Runtime Error: Variable '" + varName + "' not defined");
+                return 0;
+            }
+            return variables.get(varName);
         } else if (ctx.INT_VALUE() != null) {
-            return Integer.parseInt(ctx.INT_VALUE().getText());
+            try {
+                return Integer.parseInt(ctx.INT_VALUE().getText());
+            } catch (NumberFormatException e) {
+                System.err.println("Runtime Error: Invalid int value '" + ctx.INT_VALUE().getText() + "'");
+                return 0;
+            }
         } else if (ctx.expression() != null) {
             return evaluateExpression(ctx.expression());
         }

@@ -1,0 +1,10 @@
+(SET $x = 15 TES)
+(SET $y = 10 TES)
+
+(IF $x > $y
+    (LOG "x is > than y" GOL)
+FI)
+
+(IF $x < $y
+    (LOG "x is < than y" GOL)
+FI)

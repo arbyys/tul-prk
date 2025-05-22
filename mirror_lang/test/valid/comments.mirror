@@ -1,0 +1,12 @@
+// Single line comment
+(SET $test = 42 TES)
+
+(LOG "Comment test" GOL)
+
+(IGNORE
+    This is
+    multi-line
+    comment
+ERONGI)
+
+(LOG "After multi-line comment" GOL)

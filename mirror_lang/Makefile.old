@@ -1,0 +1,58 @@
+JAVA = java
+JAVAC = javac
+ifndef ANTLR_JAR
+    # Either set ANTLR_JAR as enviromental variable (recommended) or replace below with your path
+    ANTLR_JAR = lib/antlr-4.13.1-complete.jar
+endif
+MAIN_CLASS = Main
+BIN_DIR = bin
+TEST_VALID_DIR = test/valid
+TEST_INVALID_DIR = test/invalid
+
+.PHONY: all
+all: test-all
+
+.PHONY: test-all
+test-all: test-valid test-invalid
+
+.PHONY: test-valid
+test-valid:
+	@echo "Running valid tests..."
+	@for file in $(TEST_VALID_DIR)/*.mirror; do \
+		echo "\n--- Testing $$file ---"; \
+		$(JAVA) -cp ".;$(ANTLR_JAR);$(BIN_DIR)" $(MAIN_CLASS) $$file || echo "ERROR: Valid test $$file failed!"; \
+	done
+	@echo "\nValid tests completed."
+
+.PHONY: test-invalid
+test-invalid:
+	@echo "Running invalid tests..."
+	@for file in $(TEST_INVALID_DIR)/*.mirror; do \
+		echo "\n--- Testing $$file ---"; \
+		if $(JAVA) -cp ".;$(ANTLR_JAR);$(BIN_DIR)" $(MAIN_CLASS) $$file 2>/dev/null; then \
+			echo "ERROR: Invalid test $$file passed when it should have failed!"; \
+		else \
+			echo "SUCCESS: Invalid test $$file correctly failed as expected."; \
+		fi; \
+	done
+	@echo "\nInvalid tests completed."
+
+# Clean up any temporary files
+.PHONY: clean
+clean:
+	@echo "Cleaning up..."
+	@rm -f *.class
+	@echo "Clean completed."
+
+# Help target
+.PHONY: help
+help:
+	@echo "Mirror Language Test Suite"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  all         - Run all tests (default)"
+	@echo "  test-all    - Run all tests"
+	@echo "  test-valid  - Run only valid tests"
+	@echo "  test-invalid- Run only invalid tests"
+	@echo "  clean       - Clean up temporary files"
+	@echo "  help        - Display this help message"
