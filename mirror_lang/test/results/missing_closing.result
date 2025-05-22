@@ -1,2 +1,4 @@
-Error: Unable to initialize main class Main
-Caused by: java.lang.NoClassDefFoundError: org/antlr/v4/runtime/misc/ParseCancellationException
+Syntax Error at line 3:43 - extraneous input '<EOF>' expecting {WS, NEWLINE, '(SET', '(LOOPIF', '(IF', 'FI)', '(LOG', '(IGNORE'}
+Offending symbol: '<EOF>'
+Parsing cancelled: Syntax error in Mirror language program
+Test failed with exit code 1

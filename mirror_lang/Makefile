@@ -1,59 +1,42 @@
-# Simple Makefile for Mirror Language tests
-
-# Variables
-JAVA = java
-# Use a fixed path for ANTLR_JAR to simplify
-ANTLR_JAR = lib/antlr-4.13.1-complete.jar
-MAIN_CLASS = Main
-BIN_DIR = bin
 VALID_DIR = test/valid
 INVALID_DIR = test/invalid
 RESULTS_DIR = test/results
+# Either set ANTLR_JAR as enviromental variable (recommended) or uncomment below with your path
+# ANTLR_JAR = /mnt/c/antlr/antlr-4.13.2-complete.jar
+ifndef ANTLR_JAR
+	@echo "Downloading ANTLR JAR..."
+	@mkdir -p lib
+	@curl -o lib/antlr-4.13.2-complete.jar https://www.antlr.org/download/antlr-4.13.2-complete.jar
+	@echo "ANTLR JAR downloaded to lib/antlr-4.13.2-complete.jar"
+    ANTLR_JAR = lib/antlr-4.13.2-complete.jar
+endif
 
-# Default target
 .PHONY: all
 all: test
 
-# Create results directory
 $(RESULTS_DIR):
 	@mkdir -p $(RESULTS_DIR)
 
-# Run a single test and save result
-$(RESULTS_DIR)/%.result: $(VALID_DIR)/%.mirror $(RESULTS_DIR)
-	@echo "Testing $<..."
-	@$(JAVA) -cp ".;$(ANTLR_JAR);$(BIN_DIR)" $(MAIN_CLASS) $< > $@ 2>&1 || echo "Test failed with exit code $$?" >> $@
-	@echo "Result saved to $@"
-
-$(RESULTS_DIR)/%.result: $(INVALID_DIR)/%.mirror $(RESULTS_DIR)
-	@echo "Testing $<..."
-	@$(JAVA) -cp ".;$(ANTLR_JAR);$(BIN_DIR)" $(MAIN_CLASS) $< > $@ 2>&1 || echo "Test failed with exit code $$?" >> $@
-	@echo "Result saved to $@"
-
-# Get all test files
-VALID_TESTS = $(wildcard $(VALID_DIR)/*.mirror)
-INVALID_TESTS = $(wildcard $(INVALID_DIR)/*.mirror)
-
-# Convert test paths to result paths
-VALID_RESULTS = $(patsubst $(VALID_DIR)/%.mirror,$(RESULTS_DIR)/%.result,$(VALID_TESTS))
-INVALID_RESULTS = $(patsubst $(INVALID_DIR)/%.mirror,$(RESULTS_DIR)/%.result,$(INVALID_TESTS))
-
-# Run all tests
 .PHONY: test
 test: test-valid test-invalid
 
-# Run valid tests
 .PHONY: test-valid
-test-valid: $(VALID_RESULTS)
-	@echo "All valid tests completed."
+test-valid: $(RESULTS_DIR)
+	@for file in $(VALID_DIR)/*.mirror; do \
+		echo "Testing $$file"; \
+		basename=$$(basename $$file .mirror); \
+		java -cp ".:$(ANTLR_JAR):bin" Main $$file > $(RESULTS_DIR)/$$basename.result 2>&1 || echo "Test failed with exit code $$?" >> $(RESULTS_DIR)/$$basename.result; \
+	done
 
-# Run invalid tests
 .PHONY: test-invalid
-test-invalid: $(INVALID_RESULTS)
-	@echo "All invalid tests completed."
+test-invalid: $(RESULTS_DIR)
+	@for file in $(INVALID_DIR)/*.mirror; do \
+		echo "Testing $$file"; \
+		basename=$$(basename $$file .mirror); \
+		java -cp ".:$(ANTLR_JAR):bin" Main $$file > $(RESULTS_DIR)/$$basename.result 2>&1 || echo "Test failed with exit code $$?" >> $(RESULTS_DIR)/$$basename.result; \
+	done
 
-# Clean up results
 .PHONY: clean
 clean:
-	@echo "Cleaning up..."
 	@rm -rf $(RESULTS_DIR)
-	@echo "Clean completed."
+	@echo "Clean completed"

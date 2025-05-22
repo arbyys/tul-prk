@@ -1,2 +1,3 @@
-Error: Unable to initialize main class Main
-Caused by: java.lang.NoClassDefFoundError: org/antlr/v4/runtime/misc/ParseCancellationException
+Set $a = 10
+Runtime Error: Variable '$undefined_variable' is not defined
+Log: 0

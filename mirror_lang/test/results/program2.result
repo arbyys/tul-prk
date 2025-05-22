@@ -1,2 +1,23 @@
-Error: Unable to initialize main class Main
-Caused by: java.lang.NoClassDefFoundError: org/antlr/v4/runtime/misc/ParseCancellationException
+Set $a = 15
+Set $b = 105
+Log: "Current val of $b:"
+Log: 105
+Set $b = 90
+Log: "Current val of $b:"
+Log: 90
+Set $b = 75
+Log: "Current val of $b:"
+Log: 75
+Set $b = 60
+Log: "Current val of $b:"
+Log: 60
+Set $b = 45
+Log: "Current val of $b:"
+Log: 45
+Set $b = 30
+Log: "Current val of $b:"
+Log: 30
+Set $b = 15
+Log: "Current val of $b:"
+Log: 15
+Set $b = 0

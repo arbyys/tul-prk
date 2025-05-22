@@ -1,2 +1,5 @@
-Error: Unable to initialize main class Main
-Caused by: java.lang.NoClassDefFoundError: org/antlr/v4/runtime/misc/ParseCancellationException
+Syntax Error at line 3:9 - mismatched input '\n' expecting {'(', WS, VARIABLE, INT_VALUE}
+Offending symbol: '
+'
+Parsing cancelled: Syntax error in Mirror language program
+Test failed with exit code 1

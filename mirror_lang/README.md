@@ -53,13 +53,15 @@ ERONGI)
 
 ___
 
-# Příkazy
-  - `java -jar $env:ANTLR_JAR -Dlanguage=Java -visitor MirrorLang.g4 -o gen`
-  - `javac -cp ".;$env:ANTLR_JAR" .\*.java .\gen\*.java -d bin`
-  - `java -cp ".;$env:ANTLR_JAR;bin" Main test/valid/program2.mirror`
-
-# Todo
-  - error listener
-  - tidy comments
-  - valid/invalid examples
-  - 'make' control commands
+# Makefile pro automatické spuštění testů
+- (nutno nastavit proměnnou `ANTLR_JAR` v příkazové řádce (export nebo proměnná prostředí) nebo v Makefile)
+- dostupné příkazy
+    - `make clean` 
+    - `make test`
+        - `make test-valid`
+        - `make test-invalid`
+        
+# Příkazy pro ruční ovládání
+- `java -jar $env:ANTLR_JAR -Dlanguage=Java -visitor MirrorLang.g4 -o gen`
+- `javac -cp ".;$env:ANTLR_JAR" .\*.java .\gen\*.java -d bin`
+- `java -cp ".;$env:ANTLR_JAR;bin" Main test/valid/program2.mirror`

@@ -1,2 +1,4 @@
-Error: Unable to initialize main class Main
-Caused by: java.lang.NoClassDefFoundError: org/antlr/v4/runtime/misc/ParseCancellationException
+Set $a = 10
+Set $b = 0
+Runtime Error: Division by zero
+Set $result = 0
